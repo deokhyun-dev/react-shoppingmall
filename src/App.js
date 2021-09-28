@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+/*eslint-disable*/
+
+import React, { useState } from "react";
+import { Route, Switch, Link } from "react-router-dom";
+import Home from "./components/Home";
+import Detail from "./components/Detail";
+import ProductDetail from "./components/ProductDetail";
+import shoeData from "./data";
 
 function App() {
+  let [shoes, Setshoes] = useState(shoeData);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Switch>
+        <Route path="/" exact>
+          <Home shoes={shoes} />
+        </Route>
+        <Route path="/detail" exact>
+          <Detail shoes={shoes} />
+        </Route>
+        <Route path="/detail/:index">
+          <ProductDetail shoes={shoes} />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
